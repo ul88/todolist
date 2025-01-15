@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <div sec:authorize="isAnonymous()">
+        <form action="/auth/login" method="get">
+            <input type="submit" value="로그인">
+        </form>
+        <form action="/auth/signup" method="get">
+            <input type="submit" value="회원가입">
+        </form>
+    </div>
+
+    <div sec:authorize="isAnonymous() == false">
+        <p th:text="${#authentication.name}">님 반갑습니다.</p>
+        <form action="/auth/logout" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </div>
+
+
+    <th:block th:each="dto : ${list}">
+        <a th:text="${dto.name}" th:href="@{/todo/content(name=${dto.name})}"></a>
+    </th:block>
+</body>
+</html>

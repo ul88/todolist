@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/auth/signup" method="post">
+        <input type="text" th:name="username" placeholder="아이디를 입력해주세요">
+        <input type="password" th:name="password" placeholder="비밀번호를 입력해주세요">
+        <input type="password" th:name="repassword" placeholder="비밀번호를 다시 입력해주세요">
+        <input type="submit" value="회원가입">
+    </form>
+</body>
+</html>

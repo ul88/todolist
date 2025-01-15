@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <form action="/todo/update" method="post">
+        <input type="hidden" th:name="id" th:value="${id}">
+        <input type="text" th:name="name" th:value="${name}" readonly>
+        <input type="text" th:name="content" th:value="${content}">
+        <input type="submit" value="수정하기">
+    </form>
+</body>
+</html>

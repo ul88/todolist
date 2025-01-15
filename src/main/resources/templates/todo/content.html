@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:if="${#authentication.name == name}">
+    <form action="/todo/create" method="post">
+        <input type="hidden" th:name="name" th:value="${#authentication.name}">
+        <input type="text" th:name="content">
+        <input type="submit" value="등록">
+    </form>
+    </th:block>
+
+    <h1>완료X</h1>
+    <th:block th:each="dto : ${todoList}">
+        <th:block th:if="${dto.completed == false}">
+            <h5 th:text="${dto.content}"></h5>
+            <th:block th:if="${#authentication.name == dto.member.name}">
+            <form th:action="@{/todo/change}" method="post">
+                <input type="hidden" th:name="id" th:value="${dto.id}">
+                <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                <input type="submit" value="전환">
+            </form>
+            <form th:action="@{/todo/delete}" method="post">
+                <input type="hidden" th:name="id" th:value="${dto.id}">
+                <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                <input type="submit" value="삭제">
+            </form>
+                <form th:action="@{/todo/update}" method="get">
+                    <input type="hidden" th:name="id" th:value="${dto.id}">
+                    <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                    <input type="hidden" th:name="content" th:value="${dto.content}">
+                    <input type="submit" value="수정">
+                </form>
+            </th:block>
+        </th:block>
+    </th:block>
+
+    <h1>완료O</h1>
+    <th:block th:each="dto : ${todoList}">
+        <th:block th:if="${dto.completed == true}">
+            <h5 th:text="${dto.content}"></h5>
+            <th:block th:if="${#authentication.name == dto.member.name}">
+            <form th:action="@{/todo/change}" method="post">
+                <input type="hidden" th:name="id" th:value="${dto.id}">
+                <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                <input type="submit" value="전환">
+            </form>
+            <form th:action="@{/todo/delete}" method="post">
+                <input type="hidden" th:name="id" th:value="${dto.id}">
+                <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                <input type="submit" value="삭제">
+            </form>
+                <form th:action="@{/todo/update}" method="get">
+                    <input type="hidden" th:name="id" th:value="${dto.id}">
+                    <input type="hidden" th:name="name" th:value="${dto.member.name}">
+                    <input type="hidden" th:name="content" th:value="${dto.content}">
+                    <input type="submit" value="수정">
+                </form>
+            </th:block>
+        </th:block>
+    </th:block>
+</body>
+</html>
